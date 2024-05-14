@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addTodo, toggleUnCheckTodo, toggleCheckTodo,editTodo,deleteTodo } from './redux/todoSlice';
+import { addTodo, toggleUnCheckTodo, toggleCheckTodo,editTodo,deleteTodo } from './Modules/redux/todoSlice';
 import './App.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Modal from "./Modules/Components/Modal"
 function App() {
+  // Redux state and dispatcher setup
   const { todos } = useSelector((state) => state.todo);
+  const dispatch = useDispatch();
+
+  // State management for modal and todo form
   const [newTodoTitle, setNewTodoTitle] = useState('');
   const [newTodoDescription, setNewTodoDescription] = useState('');
   const [updateMode, setUpdateMode] = useState(false);
   const [editTodoId, setEditTodoId] = useState(null);
-  const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false); 
 
+  // Function to handle adding or updating todo
   const handleAddTodo = () => {
     if (updateMode) {
       dispatch(editTodo({ id: editTodoId, title: newTodoTitle }));
@@ -32,6 +37,7 @@ function App() {
     }
   };
 
+  // Function to handle toggling todo completion status
   const handleToggleTodo = (id, title, description) => {
     setShowModal(true);
     setNewTodoTitle(title);
@@ -40,6 +46,7 @@ function App() {
     setEditTodoId(id);
   };
 
+  // Function to handle checkbox change for todo
   const handleCheckboxChange = (id, title, checkboxDone,description) => {
     if (!checkboxDone) {
       toast.success("Item Completed Successfully!")
@@ -49,6 +56,8 @@ function App() {
       dispatch(toggleUnCheckTodo(id));
     }
   };
+
+  // Function to handle deleting a todo
   const handleDeleteTodo = (id,title) => {
     dispatch(deleteTodo(id));
     toast.error("Item Deleted Successfully!")
@@ -57,6 +66,8 @@ function App() {
     setNewTodoDescription('');
     }
   };
+
+  // Function to open modal for adding  todo
   const handleOpenModal = () => {
     setShowModal(true);
     setNewTodoTitle('');
@@ -64,6 +75,7 @@ function App() {
     setNewTodoDescription('');
   };
 
+  // Function to close modal
   const handleCloseModal = () => {
     setShowModal(false);
   };
@@ -71,43 +83,23 @@ function App() {
   return (
     <div className="app">
      <ToastContainer />
+      {/* Header section */}
        <div className='modal-heading-parent'>
         <div/>
        <h1 className='textCenter'>Todo App</h1>
-      <button className="normal-button" onClick={handleOpenModal}>Add Item</button> {/* Step 4 */}
+      <button className="normal-button" onClick={handleOpenModal}>Add Item</button>
       </div>
-      {showModal && (
-        <div className="modal"> {/* Step 4 */}
-          <div className="modal-content"> {/* Step 4 */}
-          <div className='modal-heading-parent'>
-            <div/>
-          {updateMode ? <h1 className='textCenter'> Update Item</h1>:<h1 className='textCenter'> Add New Item</h1>}
-          <span className="close" onClick={handleCloseModal}>&times;</span> {/* Step 4 */}
-          </div>
-            <div className="add-todo"> {/* Step 4 */}
-              <input
-                type="text"
-                value={newTodoTitle}
-                onChange={(e) => setNewTodoTitle(e.target.value)}
-                className='input-css'
-                placeholder="Add a item..."
-              />
-              <textarea
-                type="text"
-                value={newTodoDescription}
-                onChange={(e) => setNewTodoDescription(e.target.value)}
-                className='input-css textarea-height'
-                placeholder="Add a description..."
-              />
-              {updateMode ? (
-                <button className='normal-button' onClick={handleAddTodo}>Update</button>
-              ) : (
-                <button className='normal-button' onClick={handleAddTodo}>Add</button>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
+      <Modal
+        showModal={showModal}
+        handleCloseModal={handleCloseModal}
+        updateMode={updateMode}
+        newTodoTitle={newTodoTitle}
+        newTodoDescription={newTodoDescription}
+        setNewTodoTitle={setNewTodoTitle}
+        setNewTodoDescription={setNewTodoDescription}
+        handleAddTodo={handleAddTodo}
+      />
+      {/* Todo list */}
       <ul>
         {todos.map((todo) => (
           <li key={todo.id}>
