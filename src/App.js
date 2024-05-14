@@ -117,12 +117,15 @@ function App() {
    * handleDeleteTodo(todo.id, todo.title);
   */
   const handleDeleteTodo = (id,title) => {
-    dispatch(deleteTodo(id));
-    toast.error("Item Deleted Successfully!")
-    if(title===newTodoTitle){
-    setNewTodoTitle('');
-    setNewTodoDescription('');
+    if(window.confirm('Are you sure?')){
+      dispatch(deleteTodo(id));
+      toast.error("Item Deleted Successfully!")
+      if(title===newTodoTitle){
+        setNewTodoTitle('');
+        setNewTodoDescription('');
+      }
     }
+
   };
 
   /**
