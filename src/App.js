@@ -17,8 +17,19 @@ function App() {
   const [editTodoId, setEditTodoId] = useState(null);
   const [showModal, setShowModal] = useState(false); 
 
-  // Function to handle adding or updating todo
-  const handleAddTodo = () => {
+  /**
+   * Handles the addition of a new todo item.
+   * 
+   * This function is responsible for processing the user's input and adding a new todo item to the list.
+   * 
+   * @returns {void}
+   * @memberof TodoListController
+   * @function handleAddTodo
+   * @example
+   * // Usage:
+   * handleAddTodo();
+  */
+  const handleAddTodo = () => { 
     if (updateMode) {
       dispatch(editTodo({ id: editTodoId, title: newTodoTitle }));
       setNewTodoTitle('');
@@ -37,7 +48,22 @@ function App() {
     }
   };
 
-  // Function to handle toggling todo completion status
+  /**
+   * Handles the toggling of a todo item's completion status.
+   *
+   * This function is responsible for toggling the completion status of a todo item,
+   * identified by its unique ID, and updating its title and description accordingly.
+   * 
+   * @param {string} id - The unique identifier of the todo item.
+   * @param {string} title - The title of the todo item.
+   * @param {string} description - The description of the todo item.
+   * @returns {void}
+   * @function handleToggleTodo
+   * @memberof TodoListController
+   * @example
+   * // Usage:
+   * handleToggleTodo(todo.id, todo.title, todo.description);
+ */
   const handleToggleTodo = (id, title, description) => {
     setShowModal(true);
     setNewTodoTitle(title);
@@ -46,7 +72,23 @@ function App() {
     setEditTodoId(id);
   };
 
-  // Function to handle checkbox change for todo
+  /**
+   * Handles the change of checkbox status for a todo item.
+   *
+   * This function is responsible for updating the completion status of a todo item
+   * identified by its unique ID, and updating its title, checkbox status, and description accordingly.
+   * 
+   * @param {string} id - The unique identifier of the todo item.
+   * @param {string} title - The title of the todo item.
+   * @param {boolean} checkboxDone - The new status of the checkbox for the todo item.
+   * @param {string} description - The description of the todo item.
+   * @returns {void}
+   * @function handleCheckboxChange
+   * @memberof TodoListController
+   * @example
+   * // Usage:
+   * handleCheckboxChange(todo.id, todo.title, !todo.completed, todo.description);
+  */
   const handleCheckboxChange = (id, title, checkboxDone,description) => {
     if (!checkboxDone) {
       toast.success("Item Completed Successfully!")
@@ -57,7 +99,21 @@ function App() {
     }
   };
 
-  // Function to handle deleting a todo
+  /**
+   * Handles the deletion of a todo item.
+   *
+   * This function is responsible for deleting a todo item from the list
+   * based on its unique identifier and title.
+   * 
+   * @param {string} id - The unique identifier of the todo item to be deleted.
+   * @param {string} title - The title of the todo item to be deleted.
+   * @returns {void}
+   * @function handleDeleteTodo
+   * @memberof TodoListController
+   * @example
+   * // Usage:
+   * handleDeleteTodo(todo.id, todo.title);
+  */
   const handleDeleteTodo = (id,title) => {
     dispatch(deleteTodo(id));
     toast.error("Item Deleted Successfully!")
@@ -67,7 +123,19 @@ function App() {
     }
   };
 
-  // Function to open modal for adding  todo
+  /**
+   * Opens the modal for adding a new todo.
+   *
+   * This function is responsible for displaying the modal window
+   * to allow the user to add a new todo item.
+   * 
+   * @returns {void}
+   * @function handleOpenModal
+   * @memberof TodoListController
+   * @example
+   * // Usage:
+   * handleOpenModal();
+  */
   const handleOpenModal = () => {
     setShowModal(true);
     setNewTodoTitle('');
@@ -75,7 +143,18 @@ function App() {
     setNewTodoDescription('');
   };
 
-  // Function to close modal
+  /**
+   * Closes the modal.
+   *
+   * This function is responsible for hiding or closing the modal window.
+   * 
+   * @returns {void}
+   * @function handleCloseModal
+   * @memberof TodoListController
+   * @example
+   * // Usage:
+   * handleCloseModal();
+  */
   const handleCloseModal = () => {
     setShowModal(false);
   };
