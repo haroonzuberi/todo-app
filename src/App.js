@@ -31,17 +31,19 @@ function App() {
   */
   const handleAddTodo = () => { 
     if (updateMode) {
-      dispatch(editTodo({ id: editTodoId, title: newTodoTitle }));
+      dispatch(editTodo({ id: editTodoId, title: newTodoTitle, description: newTodoDescription }));
       setNewTodoTitle('');
       setUpdateMode(false);
       setNewTodoDescription('')
       toast.success("Item Updated Successfully!")
+      setShowModal(false);
     } else {
       if (newTodoTitle.trim() !== '') {
         dispatch(addTodo({ id: Math.floor(Math.random() * 1000), title: newTodoTitle, description: newTodoDescription, checkboxDone: false }));
         setNewTodoTitle('');
         setNewTodoDescription('');
         toast.success("Item Added Successfully!")
+        setShowModal(false);
       }else{
         toast.error("Title is Required!")
       }
@@ -199,7 +201,7 @@ function App() {
             <button className='delete-button' onClick={() => handleDeleteTodo(todo.id,todo.title)}>Delete</button>
          </div>
          </div>
-         {todo.description.length>0&&<p className='para-text'>{todo.description}</p>}
+         {todo.description &&<p className='para-text'>{todo.description}</p>}
           </li>
         ))}
       </ul>
