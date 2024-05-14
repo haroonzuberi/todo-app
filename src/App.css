@@ -1,0 +1,134 @@
+/* App.css */
+.app {
+  max-width: 70%;
+  width: 60%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 5%;
+}
+.textCenter{
+text-align: center;
+}
+ul {
+  list-style: none;
+  padding: 0;
+}
+.add-todo{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+li {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+.para-text{
+  font-size: 13px;
+    padding-left: 2%;
+}
+.input-css{
+  width: 80%;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    border: 2px solid green;
+    border-radius: 6px;
+    margin-right: 5%;
+    margin-bottom: 1%;
+}
+.normal-button{
+  background: lightseagreen;
+    color: white;
+    border-radius: 5px;
+    border: 2px solid lightseagreen;
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+.todo-container{
+  display:flex;justify-content:space-between;align-items:center
+}
+.flexBasis60{
+  flex-basis: 60%;
+}
+.flexBasis40{
+  flex-basis: 40%;
+  display: flex;
+  justify-content: flex-end;
+}
+.delete-button{
+  background: red;
+    color: white;
+    border-radius: 5px;
+    border: 2px solid red;
+}
+.markdone-button{
+  background: DodgerBlue;
+    color: white;
+    border-radius: 5px;
+    border: 2px solid DodgerBlue;
+    margin-right: 1%;
+}
+.textarea-height{
+  height: 90px;
+}
+.editable {
+  cursor: pointer;
+}
+
+.edit-container {
+  margin-top: 10px;
+}
+
+.edit-container input {
+  margin-right: 10px;
+}
+
+.edit-container button {
+  cursor: pointer;
+}
+
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  width: 50%;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.modal-heading-parent{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
